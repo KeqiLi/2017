@@ -1,4 +1,6 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
@@ -21,7 +23,7 @@ public class HashCode2017 {
     public static void main(String[] args) throws IOException {
 
         Charset charset = Charset.forName("US-ASCII");
-        Path file = FileSystems.getDefault().getPath("src", "me_at_the_zoo.in");
+        Path file = FileSystems.getDefault().getPath("me_at_the_zoo.in");
         BufferedReader reader = Files.newBufferedReader(file, charset);
         String line = reader.readLine();
 
@@ -64,6 +66,13 @@ public class HashCode2017 {
             requests[end][vid] = req;
         }
 
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+
+        fw = new FileWriter("small.out");
+        bw = new BufferedWriter(fw);
+        bw.write(String.format("%d\n", cacheNo));
+
         for (int i = 0; i < cacheNo; i++) {
             Cache c = new Cache(cacheSize, vidNo, videos);
             for (int j = 0; j < endNo; j++) {
@@ -71,7 +80,13 @@ public class HashCode2017 {
                     c.connectEndPoint(j);
                 }
             }
-
+            c.recalculate();
+            bw.write(String.format("%d ", i));
+            for(int vid: c.getVideos()){
+                bw.write(String.format("%d ", vid));
+            }
+            bw.write("\n");
         }
+
     }
 }
