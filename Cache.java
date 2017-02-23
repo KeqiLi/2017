@@ -51,6 +51,10 @@ public class Cache {
         }
     }
 
+    public ArrayList<Integer> getVideos(){
+        return this.videos;
+    }
+
     public class Pair {
         private int index;
         private int value;
