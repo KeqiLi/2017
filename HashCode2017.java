@@ -14,6 +14,7 @@ public class HashCode2017 {
     public static int[] videos;
     public static int[][] requests;
     public static int[][] endpointsLatency;
+    public static int[][] output;
 
 
 
@@ -64,7 +65,12 @@ public class HashCode2017 {
         }
 
         for (int i = 0; i < cacheNo; i++) {
-            int[] connectEnds = new int[endpointsLatency.length];
+            Cache c = new Cache(cacheSize, vidNo, videos);
+            for (int j = 0; j < endNo; j++) {
+                if (endpointsLatency[j][i] != 0) {
+                    c.connectEndPoint(j);
+                }
+            }
 
         }
     }
