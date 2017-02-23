@@ -55,7 +55,7 @@ public class Cache {
         return this.videos;
     }
 
-    public class Pair {
+    public class Pair implements Comparable<Pair>{
         private int index;
         private int value;
         public Pair(int index, int value){
@@ -63,7 +63,8 @@ public class Cache {
             this.value = value;
         }
 
-        @overide
+
+        @Override
         public int compareTo(Pair obj){
             if (this.value < obj.value) return -1;
             if (this.value > obj.value) return 1;
