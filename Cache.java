@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,12 +12,14 @@ public class Cache {
     private int[][] requests;
     private int[] vidSize;
     private int[] demand;
+    private ArrayList<Integer> videos = new ArrayList<Integer>();
 
-    public Cache(int size, int noVid){
+    public Cache(int size, int noVid, int[] vidSize){
         this.size = size;
         this.noVid = noVid;
 //        this.requests = new int[noVid];
         this.demand = new int[noVid];
+        this.vidSize = vidSize;
 
     }
 
@@ -36,9 +39,15 @@ public class Cache {
         }
 
         Arrays.sort(pairs, Collections.reverseOrder());
-
+        int storage = 0;
         for(int i=0; i<noVid; i++){
-            if () pairs[i].index
+            if (storage + vidSize[pairs[i].index] <= this.size) {
+                storage += vidSize[pairs[i].index];
+                //***********
+                //optimisation
+                //***********
+                this.videos.add(pairs[i].index);
+            }
         }
     }
 
@@ -56,7 +65,6 @@ public class Cache {
             if (this.value > obj.value) return 1;
             return 0;
         }
-
     }
 
 }
